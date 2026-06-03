@@ -1,0 +1,489 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>HIGA | Crochet Studio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="{% static 'app1/css/mystyle.css' %}?v=16">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">
+        <img src="{% static 'app1/images/logo.png' %}" alt="HIGA Logo">
+    </div>
+
+    <div class="menu-toggle" id="menu-toggle">
+        <i class="fa-solid fa-bars"></i>
+    </div>
+
+    <div class="nav-links-right" id="nav-links">
+        <a href="/" onclick="closeMenu()">HOME</a>
+        <a href="#about" onclick="closeMenu()">ABOUT</a>
+        <a href="#products" onclick="closeMenu()">PRODUCTS</a>
+        <a href="#contact" onclick="closeMenu()">CONTACT</a>
+
+        <div class="nav-cart" onclick="toggleCart()">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span id="cart-count">0</span>
+        </div>
+
+        <a href="{% url 'login' %}" class="nav-cart">
+            <i class="fa-solid fa-user"></i>
+        </a>
+    </div>
+</nav>
+
+<!-- HERO SECTION -->
+<section class="hero" style="background-image: url('{% static "app1/images/heroimg.png" %}');">
+    <div class="hero-text">
+        <h1>Crochet from the Heartland</h1>
+        <p>Sustainable fibers · Meadow-inspired hues · Handmade with love</p>
+        <button class="btn" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">
+            View Products
+        </button>
+    </div>
+</section>
+
+<!-- ABOUT SECTION -->
+<section class="about" id="about">
+    <h2>About HIGA</h2>
+    <p>
+        HIGA is a small handmade crochet brand focused on creating beautiful, meaningful pieces with care and creativity.<br>
+        Each product is thoughtfully crafted using soft yarns, natural colors, and timeless designs.<br><br>
+        We believe in slow fashion — where every stitch matters, and every piece tells a story.<br>
+        From cozy baby clothes to cute keychains and elegant crochet dresses, our collection is made to bring warmth and joy.<br>
+        Every item you see here is made with love, patience, and a passion for handmade art 
+    </p>
+</section>
+
+<!-- PRODUCT SECTION -->
+<section class="product-section" id="products">
+    <h2>OUR PRODUCTS</h2>
+    <div class="product-grid">
+        
+        <!-- Product 1 -->
+        <div class="product-card">
+            <div class="product-img">
+                <span class="cart-icon" onclick="addToCart('Sage Meadow Romper', 1390)">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </span>
+                <span class="wishlist-icon" onclick="toggleWishlist(this, 'Sage Meadow Romper', 1390)">
+                    <i class="fa-regular fa-heart"></i>
+                </span>
+                <img src="{% static 'app1/images/Sage Meadow Romper.jpg' %}" alt="sage meadow romper">
+            </div>
+            <h3>Sage Meadow Romper</h3>
+            <div class="product-price">₹ 1,390</div>
+            <div class="product-badge">👶 Baby Clothes</div>
+            <div class="product-desc">100% organic cotton, wooden buttons, soft like a cloud</div>
+            <button class="order-btn" onclick="openModal('Sage Meadow Romper', 1390)">Order Now</button>
+        </div>
+        
+        <!-- Product 2 -->
+        <div class="product-card">
+            <div class="product-img">
+                <span class="cart-icon" onclick="addToCart('Harvest Moon Set', 2190)">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </span>
+                <span class="wishlist-icon" onclick="toggleWishlist(this, 'Harvest Moon Set', 2190)">
+                    <i class="fa-regular fa-heart"></i>
+                </span>
+                <img src="{% static 'app1/images/Harvest Moon Set.jpg' %}" alt="Harvest Moon Set">
+            </div>
+            <h3>Harvest Moon Set</h3>
+            <div class="product-price">₹ 2,190</div>
+            <div class="product-badge">👶 Baby Clothes</div>
+            <div class="product-desc">Bonnet + booties in oatmeal & rust, breathable cotton</div>
+            <button class="order-btn" onclick="openModal('Harvest Moon Set', 2190)">Order Now</button>
+        </div>
+        
+        <!-- Product 3 -->
+        <div class="product-card">
+            <div class="product-img">
+                <span class="cart-icon" onclick="addToCart('Golden Hour Sunflowers', 600)">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </span>
+                <span class="wishlist-icon" onclick="toggleWishlist(this, 'Golden Hour Sunflowers', 600)">
+                    <i class="fa-regular fa-heart"></i>
+                </span>
+                <img src="{% static 'app1/images/sunflowers.jpg' %}" alt="Golden Hour Sunflowers">
+            </div>
+            <h3>Golden Hour Sunflowers</h3>
+            <div class="product-price">₹ 600</div>
+            <div class="product-badge">🌼 Flowers</div>
+            <div class="product-desc">Lavender & daisy charm, brass ring - perfect tiny gift</div>
+            <button class="order-btn" onclick="openModal('Golden Hour Sunflowers', 600)">Order Now</button>
+        </div>
+        
+        <!-- Product 4 -->
+        <div class="product-card">
+            <div class="product-img">
+                <span class="cart-icon" onclick="addToCart('Bunny Keychain', 399)">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </span>
+                <span class="wishlist-icon" onclick="toggleWishlist(this, 'Bunny Keychain', 399)">
+                    <i class="fa-regular fa-heart"></i>
+                </span>
+                <img src="{% static 'app1/images/bunny.jpg' %}" alt="bunny keychain">
+            </div>
+            <h3>Bunny Keychain</h3>
+            <div class="product-price">₹ 399</div>
+            <div class="product-badge">🔑 Keychains</div>
+            <div class="product-desc">Crochet bunny, super soft and detailed</div>
+            <button class="order-btn" onclick="openModal('Bunny Keychain', 399)">Order Now</button>
+        </div>
+        
+        <!-- Product 5 -->
+        <div class="product-card">
+            <div class="product-img">
+                <span class="cart-icon" onclick="addToCart('Customized Flower Bouquet', 800)">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </span>
+                <span class="wishlist-icon" onclick="toggleWishlist(this, 'Customized Flower Bouquet', 800)">
+                    <i class="fa-regular fa-heart"></i>
+                </span>
+                <img src="{% static 'app1/images/flowers.jpg' %}" alt="flowers">
+            </div>
+            <h3>Customized Flower Bouquet</h3>
+            <div class="product-price">₹ 800</div>
+            <div class="product-badge">🌼 Flowers</div>
+            <div class="product-desc">Set of 2 sunflowers + roses + linen wrap, never fades</div>
+            <button class="order-btn" onclick="openModal('Customized Flower Bouquet', 800)">Order Now</button>
+        </div>
+        
+        <!-- Product 6 -->
+        <div class="product-card">
+            <div class="product-img">
+                <span class="cart-icon" onclick="addToCart('Lilly', 300)">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </span>
+                <span class="wishlist-icon" onclick="toggleWishlist(this, 'Lilly', 300)">
+                    <i class="fa-regular fa-heart"></i>
+                </span>
+                <img src="{% static 'app1/images/lilly.jpg' %}" alt="lilly flower">
+            </div>
+            <h3>Lilly</h3>
+            <div class="product-price">₹ 300</div>
+            <div class="product-badge">🌼 Flowers</div>
+            <div class="product-desc">White lilly, never fades</div>
+            <button class="order-btn" onclick="openModal('Lilly', 300)">Order Now</button>
+        </div>
+        
+        <!-- Product 7 -->
+        <div class="product-card">
+            <div class="product-img">
+                <span class="cart-icon" onclick="addToCart('Cute Bow', 200)">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </span>
+                <span class="wishlist-icon" onclick="toggleWishlist(this, 'Cute Bow', 200)">
+                    <i class="fa-regular fa-heart"></i>
+                </span>
+                <img src="{% static 'app1/images/bow.jpg' %}" alt="bow clip">
+            </div>
+            <h3>Cute Bow</h3>
+            <div class="product-price">₹ 200</div>
+            <div class="product-badge">Accessorie</div>
+            <div class="product-desc">White bow clip</div>
+            <button class="order-btn" onclick="openModal('Cute Bow', 200)">Order Now</button>
+        </div>
+        
+        <!-- Product 8 -->
+        <div class="product-card">
+            <div class="product-img">
+                <span class="cart-icon" onclick="addToCart('Blossom Baby Frock', 2000)">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </span>
+                <span class="wishlist-icon" onclick="toggleWishlist(this, 'Blossom Baby Frock Set', 2000)">
+                    <i class="fa-regular fa-heart"></i>
+                </span>
+                <img src="{% static 'app1/images/Blossom Baby Dress.jpg' %}" alt="Blossom Baby Frock">
+            </div>
+            <h3>Blossom Baby Frock Set</h3>
+            <div class="product-price">₹ 2,000</div>
+            <div class="product-badge">👶 Baby Clothes</div>
+            <div class="product-desc">Tie-back, sage & cream stripes, perfect for spring</div>
+            <button class="order-btn" onclick="openModal('Blossom Baby Frock Set', 2000)">Order Now</button>
+        </div>
+    </div>
+</section>
+
+<!-- CART PANEL -->
+<div id="cartPanel" class="cart-panel">
+    <div class="cart-header">
+        <h2>Your Cart <i class="fa-solid fa-cart-shopping"></i></h2>
+        <span class="close-cart" onclick="toggleCart()"><i class="fa-solid fa-xmark"></i></span>
+    </div>
+    <div id="cartItems"></div>
+    <h3 id="cartTotal">Total: ₹0</h3>
+    <button onclick="openCheckout()">Proceed to Checkout</button>
+    <button onclick="clearCart()">Clear Cart</button>
+</div>
+
+<!-- ORDER MODAL -->
+<div id="orderModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <h2>Place Order</h2>
+        <form id="orderForm" method="POST" action="{% url 'place_order' %}">
+            {% csrf_token %}
+            <input type="hidden" name="product" id="productInput">
+            <input type="hidden" name="price" id="priceInput">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="text" name="phone" placeholder="Phone Number" required>
+            <textarea name="address" placeholder="Address" required></textarea>
+            <button type="submit" class="btn">Confirm Order</button>
+        </form>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer" id="contact">
+    <div class="footer-content">
+        <div class="footer-col">
+            <h4>HIGA Crochet</h4>
+            <p>Handmade with love, patience, and passion for artisan craft.</p>
+            <p>📍 Based in India</p>
+        </div>
+        <div class="footer-col">
+            <h4>Quick Links</h4>
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#products">Products</a>
+            <a href="#">Contact</a>
+        </div>
+        <div class="footer-col">
+            <h4>Connect</h4>
+            <a href="https://www.instagram.com/"><i class="fa-brands fa-instagram"></i> Instagram</a>
+            <a href="https://github.com/"><i class="fa-brands fa-github"></i> Github</a>
+            <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook"></i> Facebook</a>
+            <a href="https://mail.google.com/"><i class="fa-regular fa-envelope"></i> hello@higa.com</a>
+        </div>
+    </div>
+    <div class="copyright">
+        © 2025 HIGA — Crochet Studio | Olive Green · Sand · Clay
+    </div>
+</footer>
+
+<script>
+// ==================== WISHLIST FUNCTIONS ====================
+let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+function saveWishlist() {
+    localStorage.setItem("wishlist", JSON.stringify(wishlist));
+}
+
+function toggleWishlist(element, name, price) {
+    const existingIndex = wishlist.findIndex(item => item.name === name);
+    const icon = element.querySelector('i');
+    
+    if (existingIndex !== -1) {
+        // Remove from wishlist
+        wishlist.splice(existingIndex, 1);
+        icon.classList.remove('fa-solid');
+        icon.classList.add('fa-regular');
+        element.classList.remove('active');
+        showNotification(`${name} removed from wishlist`);
+    } else {
+        // Add to wishlist
+        wishlist.push({ name, price });
+        icon.classList.remove('fa-regular');
+        icon.classList.add('fa-solid');
+        element.classList.add('active');
+        showNotification(`${name} added to wishlist ❤️`);
+    }
+    
+    saveWishlist();
+}
+
+// Load wishlist state on page load
+function loadWishlistStates() {
+    document.querySelectorAll('.wishlist-icon').forEach(icon => {
+
+        const card = icon.closest('.product-card');
+        const productName = card.querySelector('h3').textContent.trim();
+
+        const exists = wishlist.some(
+            item => item.name.trim() === productName
+        );
+
+        if (exists) {
+            const heart = icon.querySelector('i');
+
+            heart.classList.remove('fa-regular');
+            heart.classList.add('fa-solid');
+
+            icon.classList.add('active');
+        }
+    });
+}
+
+// ==================== CART FUNCTIONS ====================
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+function saveCart() {
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateCartUI();
+}
+
+function addToCart(name, price) {
+    cart.push({ name, price });
+    saveCart();
+    showNotification(`${name} added to cart!`);
+}
+
+function showNotification(message) {
+    const notification = document.createElement('div');
+    notification.innerHTML = message;
+    notification.style.position = 'fixed';
+    notification.style.bottom = '20px';
+    notification.style.right = '20px';
+    notification.style.background = 'var(--olive)';
+    notification.style.color = 'white';
+    notification.style.padding = '12px 24px';
+    notification.style.borderRadius = '25px';
+    notification.style.zIndex = '9999';
+    notification.style.fontSize = '14px';
+    notification.style.boxShadow = '0 2px 10px rgba(0,0,0,0.2)';
+    document.body.appendChild(notification);
+    setTimeout(() => notification.remove(), 2000);
+}
+
+function removeFromCart(index) {
+    cart.splice(index, 1);
+    saveCart();
+}
+
+function clearCart() {
+    cart = [];
+    saveCart();
+}
+
+function toggleCart() {
+    closeMenu();
+    const panel = document.getElementById("cartPanel");
+    if (panel) {
+        panel.classList.toggle("active");
+    }
+}
+
+function updateCartUI() {
+    const cartItems = document.getElementById("cartItems");
+    const cartCount = document.getElementById("cart-count");
+    const cartTotal = document.getElementById("cartTotal");
+    
+    if (!cartItems) return;
+    
+    cartItems.innerHTML = "";
+    let total = 0;
+    
+    cart.forEach((item, index) => {
+        total += item.price;
+        cartItems.innerHTML += `
+            <div class="cart-item">
+                <span>${item.name} - ₹${item.price}</span>
+                <span class="remove-btn" onclick="removeFromCart(${index})">
+                    <i class="fa-solid fa-xmark"></i>
+                </span>
+            </div>
+        `;
+    });
+    
+    if (cartTotal) cartTotal.innerText = "Total: ₹" + total;
+    if (cartCount) cartCount.innerText = cart.length;
+}
+
+// ==================== CHECKOUT FUNCTION ====================
+function openCheckout() {
+    if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+    }
+    
+    const modal = document.getElementById("orderModal");
+    const productInput = document.getElementById("productInput");
+    
+    if (modal && productInput) {
+        let products = cart.map(item => item.name).join(", ");
+        productInput.value = products;
+        modal.style.display = "flex";
+    }
+}
+
+// ==================== MODAL FUNCTIONS ====================
+const modal = document.getElementById("orderModal");
+const productInput = document.getElementById("productInput");
+const priceInput = document.getElementById("priceInput");
+
+function openModal(productName, productPrice) {
+    if (modal) {
+        modal.style.display = "flex";
+        if (productInput) productInput.value = productName;
+        if (priceInput) priceInput.value = productPrice;
+    }
+}
+
+function closeModal() {
+    if (modal) {
+        modal.style.display = "none";
+    }
+}
+
+// Close modal when clicking outside
+window.onclick = (e) => {
+    if (modal && e.target === modal) {
+        modal.style.display = "none";
+    }
+};
+
+// ==================== NAVBAR MENU FUNCTIONS ====================
+const menuToggle = document.getElementById("menu-toggle");
+const navLinks = document.getElementById("nav-links");
+
+if (menuToggle) {
+    menuToggle.onclick = () => {
+        if (navLinks) navLinks.classList.toggle("active");
+    };
+}
+
+function closeMenu() {
+    if (navLinks) navLinks.classList.remove("active");
+}
+
+// ==================== FALLBACK FOR IMAGES ====================
+document.querySelectorAll('.product-img img').forEach(img => {
+    img.addEventListener('error', function() {
+        const parent = this.parentElement;
+        const fallbackEmojis = {
+            'Sage Meadow Romper': '👗🌿',
+            'Harvest Moon Set': '🧸🍂',
+            'Golden Hour Sunflowers': '🌻🧡',
+            'Bunny Keychain': '🐰🔑',
+            'Customized Flower Bouquet': '💐🌼',
+            'Lilly': '🌸💮',
+            'Cute Bow': '🎀✨',
+            'Blossom Baby Frock Set': '🌸🍼'
+        };
+        const productName = this.closest('.product-card')?.querySelector('h3')?.innerText || '';
+        const fallback = fallbackEmojis[productName] || '🧶';
+        parent.innerHTML = `<div style="font-size:80px; display:flex; align-items:center; justify-content:center; width:100%; height:100%;">${fallback}</div>`;
+    });
+});
+
+// ==================== INITIALIZE ====================
+document.addEventListener("DOMContentLoaded", () => {
+    updateCartUI();
+    loadWishlistStates();
+});
+console.log("✅ All JavaScript functions loaded and working!");
+</script>
+
+</body>
+</html>

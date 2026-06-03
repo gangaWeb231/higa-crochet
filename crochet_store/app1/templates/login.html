@@ -1,0 +1,1880 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Login</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    font-family:'Poppins', sans-serif;
+
+    background:#f6f3eb;
+
+    min-height:100vh;
+
+    padding:20px;
+}
+
+
+
+/* ================= LOGIN & SIGNUP ================= */
+
+.auth-wrapper{
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+}
+
+#loginForm,
+#signupForm{
+
+    width:100%;
+    max-width:420px;
+
+    background:white;
+
+    padding:45px 35px;
+
+    border-radius:32px;
+
+    box-shadow:
+    0 10px 35px rgba(0,0,0,0.08);
+
+    border:2px solid #7a8450;
+}
+
+
+h1{
+
+    text-align:center;
+
+    margin-bottom:30px;
+
+    color:#556b2f;
+
+    font-size:38px;
+
+    font-weight:700;
+}
+
+
+input{
+
+    width:100%;
+
+    padding:15px 18px;
+
+    border:none;
+
+    border-radius:16px;
+
+    background:#f3f1ea;
+
+    font-size:15px;
+
+    outline:none;
+
+    transition:0.3s;
+}
+
+
+input:focus{
+
+    border:2px solid #7a8450;
+
+    background:white;
+}
+
+
+button{
+
+    width:100%;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:18px;
+
+    background:#7a8450;
+
+    color:white;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:0.3s;
+}
+
+
+button:hover{
+
+    background:#66703f;
+
+    transform:translateY(-2px);
+}
+
+
+p{
+
+    margin-top:20px;
+
+    text-align:center;
+
+    color:#666;
+
+    font-size:14px;
+}
+
+
+a{
+
+    color:#556b2f;
+
+    text-decoration:none;
+
+    font-weight:600;
+}
+
+
+a:hover{
+
+    text-decoration:underline;
+}
+
+
+.inside-back{
+
+    display:inline-block;
+
+    margin-bottom:20px;
+
+    color:#556b2f;
+
+    font-weight:600;
+}
+
+
+
+/* ================= ACCOUNT PAGE ================= */
+
+.account-wrapper{
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+}
+
+.account-container{
+
+    width:100%;
+
+    max-width:1100px;
+
+    text-align:center;
+}
+
+
+.account-title{
+
+    font-size:70px;
+
+    color:#556b2f;
+
+    margin-bottom:10px;
+
+    font-family:'Playfair Display', serif;
+}
+
+
+.account-subtitle{
+
+    color:#777;
+
+    font-size:18px;
+
+    margin-bottom:60px;
+}
+
+
+.account-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(3,1fr);
+
+    gap:30px;
+}
+
+
+
+/* CARD */
+
+.card{
+
+    background:white;
+
+    border-radius:30px;
+
+    padding:50px 20px;
+
+    min-height:230px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    border:1px solid #e5decd;
+
+    transition:0.35s;
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,0.05);
+}
+
+
+.card:hover{
+
+    transform:translateY(-8px);
+
+    border-color:#7a8450;
+
+    box-shadow:
+    0 18px 40px rgba(0,0,0,0.08);
+}
+
+
+.card a{
+
+    width:100%;
+
+    text-decoration:none;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:18px;
+
+    color:#2d2d2d;
+}
+
+
+
+/* ICON */
+
+.icon{
+
+    width:90px;
+
+    height:90px;
+
+    border-radius:50%;
+
+    background:#f3f1ea;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+}
+
+
+.icon i{
+
+    font-size:38px;
+
+    color:#556b2f;
+}
+
+
+
+/* TEXT */
+
+.card span{
+
+    font-size:28px;
+
+    font-weight:600;
+
+    color:#2d2d2d;
+}
+
+
+
+/* SECOND ROW */
+
+.card:nth-child(4){
+
+    grid-column:1 / 2;
+}
+
+.card:nth-child(5){
+
+    grid-column:2 / 3;
+}
+
+/* ================= PROFILE POPUP ================= */
+
+#profilePopup,
+#cartPopup,
+#ordersPopup{
+
+    display:none;
+
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+
+    background:rgba(0,0,0,0.4);
+
+    justify-content:center;
+    align-items:center;
+
+    z-index:999;
+}
+
+
+
+/* POPUP BOX */
+
+.profile-box,
+.cart-box,
+.orders-box{
+
+    background:white;
+
+    width:95%;
+    max-width:550px;
+
+    max-height:80vh;
+
+    overflow-y:auto;
+
+    padding:35px;
+
+    border-radius:30px;
+
+    position:relative;
+
+    box-shadow:
+    0 15px 40px rgba(0,0,0,0.15);
+}
+
+
+
+/* CLOSE BUTTON */
+
+.close-popup,
+.close-cart-popup,
+.close-orders-popup{
+
+    position:absolute;
+
+    top:18px;
+    right:22px;
+
+    font-size:28px;
+
+    cursor:pointer;
+
+    color:#556b2f;
+
+    transition:0.3s;
+}
+
+.close-popup:hover,
+.close-cart-popup:hover,
+.close-orders-popup:hover{
+
+    transform:scale(1.1);
+    color:#7a8450;
+}
+
+
+
+/* PROFILE TITLE */
+
+.profile-title,
+.cart-title,
+.orders-title{
+
+    text-align:center;
+
+    margin-bottom:25px;
+
+    color:#556b2f;
+
+    font-family:'Playfair Display', serif;
+
+    font-size:34px;
+}
+
+
+
+/* PROFILE INPUTS */
+
+.profile-box input{
+
+    width:100%;
+
+    padding:15px 18px;
+
+    border:none;
+
+    border-radius:16px;
+
+    background:#f3f1ea;
+
+    font-size:15px;
+
+    outline:none;
+
+    transition:0.3s;
+}
+
+
+.profile-box input:focus{
+
+    border:2px solid #7a8450;
+
+    background:white;
+}
+
+
+
+/* UPDATE BUTTON */
+
+.profile-btn{
+
+    width:100%;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:18px;
+
+    background:#7a8450;
+
+    color:white;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:0.3s;
+}
+
+
+.profile-btn:hover{
+
+    background:#66703f;
+
+    transform:translateY(-2px);
+}
+
+/* ================= WISHLIST POPUP ================= */
+
+#wishlistPopup{
+
+    display:none;
+
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+
+    background:rgba(0,0,0,0.4);
+
+    justify-content:center;
+    align-items:center;
+
+    z-index:999;
+}
+
+/* Wishlist Item */
+
+.wishlist-item{
+
+    background:#f3f1ea;
+
+    padding:15px;
+
+    margin-bottom:12px;
+
+    border-radius:16px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    transition:0.3s;
+}
+
+.wishlist-item:hover{
+
+    background:#e8e3d6;
+
+    transform:translateX(5px);
+}
+
+/* Wishlist Info */
+
+.wishlist-info{
+
+    flex:1;
+}
+
+.wishlist-name{
+
+    font-weight:600;
+
+    color:#2d2d2d;
+
+    font-size:16px;
+}
+
+.wishlist-price{
+
+    color:#7a8450;
+
+    font-weight:600;
+
+    margin-top:5px;
+}
+
+.remove-wishlist{
+    background:transparent;
+    color:#dc3545;
+    border:none;
+    width:auto;
+    height:auto;
+    cursor:pointer;
+    font-size:22px;
+    transition:0.3s;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:5px;
+}
+
+.remove-wishlist:hover{
+    color:#c82333;
+    transform:scale(1.1);
+    background:transparent;
+}
+
+
+
+
+/* ================= CART & ORDERS STYLES ================= */
+
+.cart-item-list,
+.orders-list{
+
+    margin:20px 0;
+}
+
+.cart-item,
+.order-item{
+
+    background:#f3f1ea;
+
+    padding:15px;
+
+    margin-bottom:12px;
+
+    border-radius:16px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    transition:0.3s;
+}
+
+.cart-item:hover,
+.order-item:hover{
+
+    background:#e8e3d6;
+
+    transform:translateX(5px);
+}
+
+.cart-item-info,
+.order-item-info{
+
+    flex:1;
+}
+
+.cart-item-name,
+.order-item-name{
+
+    font-weight:600;
+
+    color:#2d2d2d;
+
+    font-size:16px;
+}
+
+.cart-item-price,
+.order-item-price{
+
+    color:#7a8450;
+
+    font-weight:600;
+
+    margin-top:5px;
+}
+
+/* REMOVE BUTTON - JUST X ICON */
+.remove-cart-item {
+    background: transparent;
+    color: #dc3545;
+    border: none;
+    width: auto;
+    height: auto;
+    cursor: pointer;
+    font-size: 22px;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+}
+
+.remove-cart-item:hover {
+    color: #c82333;
+    transform: scale(1.1);
+    background: transparent;
+}
+
+.cart-total{
+
+    margin:20px 0;
+
+    padding:15px;
+
+    color:#7a8450;
+
+    border-radius:16px;
+
+    text-align:right;
+
+    font-size:20px;
+
+    font-weight:600;
+}
+
+.cart-actions,
+.orders-actions{
+
+    display:flex;
+
+    gap:15px;
+
+    margin-top:20px;
+}
+
+.cart-actions button,
+.orders-actions button{
+
+    flex:1;
+
+    padding:12px;
+
+    border:none;
+
+    border-radius:16px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:0.3s;
+}
+
+.checkout-btn{
+
+    background:#7a8450;
+
+    color:white;
+}
+
+.checkout-btn:hover{
+
+    background:#66703f;
+
+    transform:translateY(-2px);
+}
+
+.clear-cart-btn{
+
+    background: #e5decd;
+    color: #556b2f;
+}
+
+.clear-cart-btn:hover{
+
+    background: #d4cfbc;
+
+    transform:translateY(-2px);
+}
+
+/* ================= ORDER FORM STYLES ================= */
+
+.order-form-section {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 2px solid #e5decd;
+}
+
+.order-form-section h3 {
+    color: #556b2f;
+    margin-bottom: 15px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.order-form-input {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 12px;
+    border: none;
+    border-radius: 16px;
+    background: #f3f1ea;
+    font-size: 14px;
+    outline: none;
+    transition: 0.3s;
+    font-family: 'Poppins', sans-serif;
+}
+
+.order-form-input:focus {
+    border: 2px solid #7a8450;
+    background: white;
+}
+
+
+
+.order-form-textarea {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 12px;
+    border: none;
+    border-radius: 16px;
+    background: #f3f1ea;
+    font-size: 14px;
+    outline: none;
+    transition: 0.3s;
+    resize: vertical;
+    font-family: 'Poppins', sans-serif;
+    min-height: 80px;
+}
+
+.order-form-textarea:focus {
+    border: 2px solid #7a8450;
+    background: white;
+}
+
+.confirm-order-btn {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 18px;
+    background: #556b2f;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 10px;
+}
+
+.confirm-order-btn:hover {
+    background: #7a8450;
+    transform: translateY(-2px);
+}
+
+.back-to-cart-btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 18px;
+    background: #e5decd;
+    color: #556b2f;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 10px;
+}
+
+.back-to-cart-btn:hover {
+    background: #d4cfbc;
+}
+
+.order-date{
+
+    font-size:12px;
+
+    color:#888;
+
+    margin-top:5px;
+}
+
+.order-total{
+
+    font-weight:700;
+
+    color:#556b2f;
+
+    margin-top:8px;
+}
+
+.empty-message{
+
+    text-align:center;
+
+    padding:40px;
+
+    color:#999;
+
+    font-size:16px;
+}
+
+.order-summary-box {
+    background: #f3f1ea;
+    padding: 15px;
+    border-radius: 16px;
+    margin-bottom: 20px;
+}
+
+.order-summary-title {
+    font-weight: 600;
+    color: #556b2f;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+    .account-grid{
+
+        grid-template-columns:
+        repeat(2,1fr);
+    }
+
+    .card:nth-child(4),
+    .card:nth-child(5){
+
+        grid-column:auto;
+    }
+}
+
+
+@media(max-width:600px){
+
+    .account-grid{
+
+        grid-template-columns:1fr;
+    }
+
+    .account-title{
+
+        font-size:48px;
+    }
+
+    .card{
+
+        min-height:190px;
+    }
+
+    #loginForm,
+    #signupForm{
+
+        padding:35px 25px;
+    }
+
+    h1{
+
+        font-size:30px;
+    }
+
+    .cart-actions,
+    .orders-actions{
+
+        flex-direction:column;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+{% if user.is_authenticated %}
+
+<div class="account-wrapper">
+
+<div class="account-container">
+
+    <a href="/" class="inside-back">
+        ← Go Back
+    </a>
+
+    <h1 class="account-title">
+        My Account
+    </h1>
+
+    <p class="account-subtitle">
+        Manage your crochet journey 
+    </p>
+
+
+    <div class="account-grid">
+
+        <!-- CART -->
+
+        <div class="card">
+
+            <a href="#"
+            onclick="openCartPopup()">
+
+                <div class="icon">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </div>
+
+                <span>
+                    Cart
+                </span>
+
+            </a>
+
+        </div>
+
+
+
+        <!-- WISHLIST -->
+
+<div class="card">
+
+    <a href="#"
+    onclick="openWishlistPopup()">
+
+        <div class="icon">
+            <i class="fa-solid fa-heart"></i>
+        </div>
+
+        <span>
+            Wishlist
+        </span>
+
+    </a>
+
+</div>
+
+
+
+        <!-- ORDERS -->
+
+        <div class="card">
+
+            <a href="#"
+            onclick="openOrdersPopup()">
+
+                <div class="icon">
+                    <i class="fa-solid fa-box"></i>
+                </div>
+
+                <span>
+                    My Orders
+                </span>
+
+            </a>
+
+        </div>
+
+
+
+       <!-- PROFILE -->
+
+<div class="card">
+
+    <a href="#"
+    onclick="openProfilePopup()">
+
+        <div class="icon">
+            <i class="fa-solid fa-user"></i>
+        </div>
+
+        <span>
+            Profile Update
+        </span>
+
+    </a>
+
+</div>
+
+
+        <!-- LOGOUT -->
+
+        <div class="card">
+
+            <a href="{% url 'logout' %}">
+
+                <div class="icon">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </div>
+
+                <span>
+                    Logout
+                </span>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+
+
+{% else %}
+
+<div class="auth-wrapper">
+
+<!-- LOGIN FORM -->
+
+<div id="loginForm">
+
+    <a href="/" class="inside-back">
+        ← Go Back
+    </a>
+
+    <h1>
+        Login
+    </h1>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <input type="hidden"
+        name="action"
+        value="login">
+
+
+        <input type="text"
+        name="username"
+        placeholder="Username"
+        required>
+
+        <br><br>
+
+
+        <input type="password"
+        name="password"
+        placeholder="Password"
+        required>
+
+        <br><br>
+
+
+        <button type="submit">
+            Login
+        </button>
+
+    </form>
+
+
+    <p>
+
+        Don't have account?
+
+        <a href="#"
+        onclick="showSignup()">
+
+            Sign Up
+
+        </a>
+
+    </p>
+
+</div>
+
+
+
+
+
+<!-- SIGNUP FORM -->
+
+<div id="signupForm"
+style="display:none;">
+
+    <a href="/" class="inside-back">
+        ← Go Back
+    </a>
+
+    <h1>
+        Sign Up
+    </h1>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <input type="hidden"
+        name="action"
+        value="signup">
+
+
+        <input type="text"
+        name="username"
+        placeholder="Username"
+        required>
+
+        <br><br>
+
+
+        <input type="email"
+        name="email"
+        placeholder="Email"
+        required>
+
+        <br><br>
+
+
+        <input type="password"
+        name="password"
+        placeholder="Password"
+        required>
+
+        <br><br>
+
+
+        <button type="submit">
+            Sign Up
+        </button>
+
+    </form>
+
+
+    <p>
+
+        Already have account?
+
+        <a href="#"
+        onclick="showLogin()">
+
+            Login
+
+        </a>
+
+    </p>
+
+</div>
+
+</div>
+
+{% endif %}
+
+<!-- PROFILE POPUP -->
+
+<div id="profilePopup">
+
+    <div class="profile-box">
+
+        <span class="close-popup"
+        onclick="closeProfilePopup()">
+
+            ×
+
+        </span>
+
+
+        <h2 class="profile-title">
+            Update Profile
+        </h2>
+
+        <input type="text"
+        id="profileUsername"
+        value="{{ user.username }}"
+        placeholder="Username">
+
+        <br><br>
+
+        <input type="email"
+        id="profileEmail"
+        value="{{ user.email }}"
+        placeholder="Email">
+
+        <br><br>
+
+        <input type="text"
+        id="profilePhone"
+        placeholder="Phone Number">
+
+        <br><br>
+
+        <input type="text"
+        id="profileAddress"
+        placeholder="Address">
+
+        <br><br>
+
+        <button class="profile-btn"
+        onclick="saveProfile()">
+
+            Update
+
+        </button>
+
+    </div>
+
+</div>
+
+<!-- CART POPUP WITH ORDER FORM INSIDE -->
+
+<div id="cartPopup">
+
+    <div class="cart-box">
+
+        <span class="close-cart-popup"
+        onclick="closeCartPopup()">
+
+            ×
+
+        </span>
+
+
+        <h2 class="cart-title" id="cartPopupTitle">
+            Your Cart <i class="fa-solid fa-cart-shopping"></i>
+        </h2>
+
+
+        <!-- Cart View -->
+        <div id="cartView">
+            <div id="cartItemsList" class="cart-item-list"></div>
+            <div id="cartTotalDisplay" class="cart-total">Total: ₹0</div>
+            <div class="cart-actions">
+                <button class="checkout-btn" onclick="showOrderForm()">
+                    Proceed to Checkout
+                </button>
+                <button class="clear-cart-btn" onclick="clearCartItems()">
+                    Clear Cart
+                </button>
+            </div>
+        </div>
+
+        <!-- Order Form View (hidden by default) -->
+        <div id="orderFormView" style="display:none;">
+            
+            <!-- Order Items Summary -->
+            <div class="order-summary-box">
+                <div class="order-summary-title"> Your Items</div>
+                <div id="orderItemsPreview"></div>
+                <div id="orderTotalPreview" style="margin-top:10px; padding-top:10px; border-top:1px solid #d4cfbc; font-weight:700; color:#556b2f;"></div>
+            </div>
+            
+            <!-- Order Form - Auto-filled from Profile -->
+            <input type="text" id="orderName" class="order-form-input" placeholder="Your Name" >
+            <input type="tel" id="orderPhone" class="order-form-input" placeholder="Phone Number" >
+            <textarea id="orderAddress" class="order-form-textarea" placeholder="Address" ></textarea>
+            <textarea id="orderNotes" class="order-form-textarea" placeholder="Special Instructions (optional)" style="min-height:60px;"></textarea>
+            
+            <button class="confirm-order-btn" onclick="placeOrder()">
+                Confirm Order
+            </button>
+            <button class="back-to-cart-btn" onclick="showCartView()">
+                ← Back to Cart
+            </button>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ORDERS POPUP -->
+
+<div id="ordersPopup">
+
+    <div class="orders-box">
+
+        <span class="close-orders-popup"
+        onclick="closeOrdersPopup()">
+
+            ×
+
+        </span>
+
+
+        <h2 class="orders-title">
+            My Orders <i class="fa-solid fa-box"></i>
+        </h2>
+
+
+        <div id="ordersList" class="orders-list">
+            <!-- Orders will be displayed here -->
+        </div>
+
+    </div>
+
+</div>
+
+<!-- WISHLIST POPUP -->
+
+<div id="wishlistPopup">
+
+    <div class="orders-box">
+
+        <span class="close-orders-popup"
+        onclick="closeWishlistPopup()">
+
+            ×
+
+        </span>
+
+        <h2 class="orders-title">
+            Wishlist <i class="fa-solid fa-heart"></i>
+        </h2>
+
+        <div id="wishlistItems" class="orders-list">
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    // ==================== WISHLIST FUNCTIONS ====================
+
+let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+function saveWishlist() {
+    localStorage.setItem("wishlist", JSON.stringify(wishlist));
+    updateWishlistDisplay();
+}
+
+function addToWishlist(name, price) {
+
+    // duplicate check
+    let exists = wishlist.some(item => item.name === name);
+
+    if(exists){
+        showNotification(`${name} already in wishlist!`);
+        return;
+    }
+
+    wishlist.push({ name, price });
+
+    saveWishlist();
+
+    showNotification(`${name} added to wishlist!`);
+}
+
+function removeWishlistItem(index) {
+
+    wishlist.splice(index, 1);
+
+    saveWishlist();
+
+    updateWishlistDisplay();
+}
+
+function updateWishlistDisplay() {
+
+    const wishlistItems =
+    document.getElementById("wishlistItems");
+
+    if(!wishlistItems) return;
+
+    if(wishlist.length === 0){
+
+        wishlistItems.innerHTML =
+        '<div class="empty-message"> Your wishlist is empty</div>';
+
+        return;
+    }
+
+    wishlistItems.innerHTML = "";
+
+    wishlist.forEach((item, index) => {
+
+        wishlistItems.innerHTML += `
+
+            <div class="wishlist-item">
+
+                <div class="wishlist-info">
+
+                    <div class="wishlist-name">
+                        ${item.name}
+                    </div>
+
+                    <div class="wishlist-price">
+                        ₹${item.price}
+                    </div>
+
+                </div>
+
+                <button class="remove-wishlist"
+                onclick="removeWishlistItem(${index})">
+
+                    <i class="fa-solid fa-xmark"></i>
+
+                </button>
+
+            </div>
+
+        `;
+    });
+}
+
+// ==================== WISHLIST POPUP ====================
+
+function openWishlistPopup(){
+
+    updateWishlistDisplay();
+
+    document.getElementById("wishlistPopup").style.display = "flex";
+}
+
+function closeWishlistPopup(){
+
+    document.getElementById("wishlistPopup").style.display = "none";
+}
+
+    
+
+// ==================== CART FUNCTIONS ====================
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+function saveCart() {
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateCartDisplay();
+}
+
+function addToCart(name, price) {
+    cart.push({ name, price });
+    saveCart();
+    showNotification(`${name} added to cart!`);
+}
+
+function removeCartItem(index) {
+    cart.splice(index, 1);
+    saveCart();
+    updateCartDisplay();
+}
+
+function clearCartItems() {
+    if(confirm("Are you sure you want to clear your entire cart?")) {
+        cart = [];
+        saveCart();
+        updateCartDisplay();
+        showNotification("Cart cleared successfully!");
+    }
+}
+
+function updateCartDisplay() {
+    const cartItemsList = document.getElementById("cartItemsList");
+    const cartTotalDisplay = document.getElementById("cartTotalDisplay");
+    
+    if(!cartItemsList) return;
+    
+    if(cart.length === 0) {
+        cartItemsList.innerHTML = '<div class="empty-message">Your cart is empty</div>';
+        if(cartTotalDisplay) cartTotalDisplay.innerHTML = "Total: ₹0";
+        return;
+    }
+    
+    cartItemsList.innerHTML = "";
+    let total = 0;
+    
+    cart.forEach((item, index) => {
+        total += item.price;
+        cartItemsList.innerHTML += `
+            <div class="cart-item">
+                <div class="cart-item-info">
+                    <div class="cart-item-name">${item.name}</div>
+                    <div class="cart-item-price">₹${item.price}</div>
+                </div>
+                <button class="remove-cart-item" onclick="removeCartItem(${index})">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+        `;
+    });
+    
+    if(cartTotalDisplay) cartTotalDisplay.innerHTML = `Total: ₹${total}`;
+}
+
+
+
+// ==================== GET PROFILE DATA ====================
+
+function getProfileName() {
+    // Get from Django user or localStorage
+    const username = "{{ user.username|escapejs }}";
+    if(username && username !== "") {
+        return username;
+    }
+    return localStorage.getItem("profileName") || "";
+}
+
+function getProfilePhone() {
+    return localStorage.getItem("phone") || "";
+}
+
+function getProfileAddress() {
+    return localStorage.getItem("address") || "";
+}
+
+// ==================== CART/ORDER FORM TOGGLE ====================
+
+function showOrderForm() {
+    if(cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+    }
+    
+    // Update order preview
+    const orderItemsPreview = document.getElementById("orderItemsPreview");
+    const orderTotalPreview = document.getElementById("orderTotalPreview");
+    
+    let total = 0;
+    let itemsHtml = "";
+    cart.forEach(item => {
+        total += item.price;
+        itemsHtml += `<div style="display:flex; justify-content:space-between; margin-bottom:8px; font-size:14px;">
+                        <span>${item.name}</span>
+                        <span style="color:#7a8450; font-weight:600;">₹${item.price}</span>
+                      </div>`;
+    });
+    
+    orderItemsPreview.innerHTML = itemsHtml;
+    orderTotalPreview.innerHTML = `Total: ₹${total}`;
+    
+    // Auto-fill form fields from profile
+    const profileName = getProfileName();
+    const profilePhone = getProfilePhone();
+    const profileAddress = getProfileAddress();
+    
+    document.getElementById("orderName").value = profileName;
+    document.getElementById("orderPhone").value = profilePhone;
+    document.getElementById("orderAddress").value = profileAddress;
+    document.getElementById("orderNotes").value = "";
+    
+    // Switch views
+    document.getElementById("cartView").style.display = "none";
+    document.getElementById("orderFormView").style.display = "block";
+    document.getElementById("cartPopupTitle").innerHTML = 'Checkout <i class="fa-solid fa-credit-card"></i>';
+}
+
+function showCartView() {
+    document.getElementById("cartView").style.display = "block";
+    document.getElementById("orderFormView").style.display = "none";
+    document.getElementById("cartPopupTitle").innerHTML = 'Your Cart <i class="fa-solid fa-cart-shopping"></i>';
+}
+
+// ==================== PLACE ORDER ====================
+
+function placeOrder() {
+    const name = document.getElementById("orderName").value.trim();
+    const phone = document.getElementById("orderPhone").value.trim();
+    const address = document.getElementById("orderAddress").value.trim();
+    
+    if(!name) {
+        alert("Please update your name in Profile Update first!");
+        openProfilePopup();
+        return;
+    }
+    if(!phone) {
+        alert("Please update your phone number in Profile Update first!");
+        openProfilePopup();
+        return;
+    }
+    if(!address) {
+        alert("Please update your address in Profile Update first!");
+        openProfilePopup();
+        return;
+    }
+    
+    const total = cart.reduce((sum, item) => sum + item.price, 0);
+    const notes = document.getElementById("orderNotes").value.trim();
+    
+    // Create order object
+    fetch("/place-order/", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "X-CSRFToken": getCookie("csrftoken")
+    },
+    body: new URLSearchParams({
+        name: name,
+        phone: phone,
+        address: address,
+        product: cart.map(item => item.name).join(", ")
+    })
+});
+    let orders = JSON.parse(localStorage.getItem("myOrders")) || [];
+    let newOrder = {
+        id: Date.now(),
+        date: new Date().toLocaleString(),
+        items: [...cart],
+        total: total,
+        customerName: name,
+        customerPhone: phone,
+        customerAddress: address,
+        notes: notes
+    };
+    orders.push(newOrder);
+    localStorage.setItem("myOrders", JSON.stringify(orders));
+    
+    // Clear cart
+    cart = [];
+    saveCart();
+    
+    // Show success message
+    alert(`✅ Order placed successfully!\n\nThank you ${name}!\nTotal: ₹${total}\n\nYour order will be delivered to:\n${address}`);
+    
+    // Close cart popup
+    closeCartPopup();
+    
+    // Refresh orders display
+    updateOrdersDisplay();
+    
+    showNotification("Order placed successfully!");
+}
+
+// ==================== ORDERS FUNCTIONS ====================
+
+function updateOrdersDisplay() {
+    const ordersList = document.getElementById("ordersList");
+    if(!ordersList) return;
+    
+    let orders = JSON.parse(localStorage.getItem("myOrders")) || [];
+    
+    if(orders.length === 0) {
+        ordersList.innerHTML = '<div class="empty-message"> No orders yet. Start shopping!</div>';
+        return;
+    }
+    
+    ordersList.innerHTML = "";
+    
+    orders.reverse().forEach(order => {
+        let itemsHtml = "";
+        order.items.forEach(item => {
+            itemsHtml += `
+                <div style="font-size:13px; color:#666; margin-top:5px;">
+                    • ${item.name} - ₹${item.price}
+                </div>
+            `;
+        });
+        
+        ordersList.innerHTML += `
+            <div class="order-item">
+                <div class="order-item-info">
+                    <div class="order-item-name">Order #${order.id}</div>
+                    <div class="order-date"> ${order.date}</div>
+                    ${itemsHtml}
+                    <div class="order-total">Total: ₹${order.total}</div>
+                    <div style="font-size:12px; color:#7a8450; margin-top:8px;">
+                        ${order.customerName} |  ${order.customerPhone}
+                    </div>
+                    <div style="font-size:12px; color:#888; margin-top:4px;">
+                         ${order.customerAddress}
+                    </div>
+                </div>
+            </div>
+        `;
+    });
+}
+
+function showNotification(message) {
+    const notification = document.createElement('div');
+    notification.innerHTML = message;
+    notification.style.position = 'fixed';
+    notification.style.bottom = '20px';
+    notification.style.right = '20px';
+    notification.style.background = '#7a8450';
+    notification.style.color = 'white';
+    notification.style.padding = '12px 24px';
+    notification.style.borderRadius = '25px';
+    notification.style.zIndex = '9999';
+    notification.style.fontSize = '14px';
+    notification.style.boxShadow = '0 2px 10px rgba(0,0,0,0.2)';
+    document.body.appendChild(notification);
+    setTimeout(() => notification.remove(), 2000);
+}
+
+// ==================== POPUP FUNCTIONS ====================
+
+function openProfilePopup(){
+    document.getElementById("profilePopup").style.display = "flex";
+    document.getElementById("profilePhone").value = localStorage.getItem("phone") || "";
+    document.getElementById("profileAddress").value = localStorage.getItem("address") || "";
+}
+
+function closeProfilePopup(){
+    document.getElementById("profilePopup").style.display = "none";
+}
+
+function openCartPopup(){
+    updateCartDisplay();
+    showCartView();
+    document.getElementById("cartPopup").style.display = "flex";
+}
+
+function closeCartPopup(){
+    document.getElementById("cartPopup").style.display = "none";
+    showCartView();
+}
+
+function openOrdersPopup(){
+    updateOrdersDisplay();
+    document.getElementById("ordersPopup").style.display = "flex";
+}
+
+function closeOrdersPopup(){
+    document.getElementById("ordersPopup").style.display = "none";
+}
+
+// ==================== PROFILE SAVE ====================
+
+function saveProfile(){
+    let phone = document.getElementById("profilePhone").value;
+    let address = document.getElementById("profileAddress").value;
+    
+    localStorage.setItem("phone", phone);
+    localStorage.setItem("address", address);
+    
+    alert("Profile Updated Successfully!");
+    closeProfilePopup();
+}
+
+// ==================== FORM TOGGLE ====================
+
+function showSignup(){
+    document.getElementById("loginForm").style.display = "none";
+    document.getElementById("signupForm").style.display = "block";
+}
+
+function showLogin(){
+    document.getElementById("signupForm").style.display = "none";
+    document.getElementById("loginForm").style.display = "block";
+}
+
+// ==================== INITIALIZE ====================
+
+// Initialize cart display on page load
+document.addEventListener("DOMContentLoaded", function() {
+    updateCartDisplay();
+    updateOrdersDisplay();
+});
+
+// Close popups when clicking outside
+window.onclick = function(event) {
+    const wishlistPopup =
+document.getElementById("wishlistPopup");
+
+if(event.target === wishlistPopup){
+    closeWishlistPopup();
+}
+    const profilePopup = document.getElementById("profilePopup");
+    const cartPopup = document.getElementById("cartPopup");
+    const ordersPopup = document.getElementById("ordersPopup");
+    
+    if(event.target === profilePopup) {
+        closeProfilePopup();
+    }
+    if(event.target === cartPopup) {
+        closeCartPopup();
+    }
+    if(event.target === ordersPopup) {
+        closeOrdersPopup();
+    }
+}
+
+function getCookie(name) {
+    let cookieValue = null;
+
+    if (document.cookie && document.cookie !== '') {
+
+        const cookies = document.cookie.split(';');
+
+        for (let i = 0; i < cookies.length; i++) {
+
+            const cookie = cookies[i].trim();
+
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+
+    return cookieValue;
+}
+
+</script>
+
+</body>
+
+</html>
