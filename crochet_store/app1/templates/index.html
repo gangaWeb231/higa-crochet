@@ -272,6 +272,11 @@
     </div>
 </footer>
 
+    <!--9/7/2025-->
+    <script>
+    const isAuthenticated = {{ user.is_authenticated|yesno:"true,false" }};
+</script>
+
 <script>
 // ==================== WISHLIST FUNCTIONS ====================
 let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
@@ -334,11 +339,17 @@ function saveCart() {
 }
 
 function addToCart(name, price) {
+
+    if (!isAuthenticated) {
+        window.location.href = "{% url 'login' %}";
+        return;
+    }
+
     cart.push({ name, price });
     saveCart();
     showNotification(`${name} added to cart!`);
 }
-
+    
 function showNotification(message) {
     const notification = document.createElement('div');
     notification.innerHTML = message;
@@ -367,13 +378,19 @@ function clearCart() {
 }
 
 function toggleCart() {
+    if (!isAuthenticated) {
+        window.location.href = "{% url 'login' %}";
+        return;
+    }
+
     closeMenu();
+
     const panel = document.getElementById("cartPanel");
     if (panel) {
         panel.classList.toggle("active");
     }
 }
-
+    
 function updateCartUI() {
     const cartItems = document.getElementById("cartItems");
     const cartCount = document.getElementById("cart-count");
@@ -423,11 +440,15 @@ const productInput = document.getElementById("productInput");
 const priceInput = document.getElementById("priceInput");
 
 function openModal(productName, productPrice) {
-    if (modal) {
-        modal.style.display = "flex";
-        if (productInput) productInput.value = productName;
-        if (priceInput) priceInput.value = productPrice;
+
+    if (!isAuthenticated) {
+        window.location.href = "{% url 'login' %}";
+        return;
     }
+
+    modal.style.display = "flex";
+    productInput.value = productName;
+    priceInput.value = productPrice;
 }
 
 function closeModal() {
