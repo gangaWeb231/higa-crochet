@@ -17,7 +17,7 @@ def user_login(request):
 
     # If already logged in
     if request.user.is_authenticated:
-        return render(request, "login.html")
+        return redirect("index")      # or redirect("orders")
 
     if request.method == "POST":
 
@@ -45,7 +45,7 @@ def user_login(request):
             )
 
             # Login immediately
-            login(request, user)
+            # login(request, user)
 
             # Redirect to account page
             return redirect("login")
