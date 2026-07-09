@@ -92,25 +92,23 @@ def user_logout(request):
 
 
 # PLACE ORDER
+
 @login_required
 def place_order(request):
 
     if request.method == "POST":
-
         name = request.POST.get("name")
         phone = request.POST.get("phone")
         address = request.POST.get("address")
         product = request.POST.get("product")
 
-    Order.objects.create(
-        user=request.user,
-        name=name,
-        phone=phone,
-        address=address,
-        product=product
-)
-
-    return redirect("index")
+        Order.objects.create(
+            user=request.user,
+            name=name,
+            phone=phone,
+            address=address,
+            product=product
+        )
 
     return redirect("index")
 
