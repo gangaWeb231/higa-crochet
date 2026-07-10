@@ -802,4 +802,34 @@
             text-align: center;
         }
     }
+.cart-item{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin:12px 0;
+    padding:10px;
+    border-bottom:1px solid #ddd;
+}
+
+.cart-product-image{
+    width:70px;
+    height:70px;
+    border-radius:10px;
+    object-fit:cover;
+}
+
+.cart-info{
+    flex:1;
+}
+
+.cart-info h4{
+    margin:0;
+    font-size:15px;
+}
+
+.cart-info p{
+    margin:4px 0 0;
+    color:#777;
+    font-weight:600;
+}
 
