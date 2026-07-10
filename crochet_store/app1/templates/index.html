@@ -72,7 +72,7 @@
         <!-- Product 1 -->
         <div class="product-card">
             <div class="product-img">
-                <span class="cart-icon" onclick="addToCart('Sage Meadow Romper', 1390)">
+                <span class="cart-icon" onclick="addToCart('Sage Meadow Romper', 1390,'{% static "app1/images/Sage Meadow Romper.jpg" %}')">
                     <i class="fa-solid fa-cart-shopping"></i>
                 </span>
                 <span class="wishlist-icon" onclick="toggleWishlist(this, 'Sage Meadow Romper', 1390)">
@@ -90,7 +90,7 @@
         <!-- Product 2 -->
         <div class="product-card">
             <div class="product-img">
-                <span class="cart-icon" onclick="addToCart('Harvest Moon Set', 2190)">
+                <span class="cart-icon" onclick="addToCart('Harvest Moon Set', 2190,'{% static "app1/images/Sage Meadow Romper.jpg" %}')">
                     <i class="fa-solid fa-cart-shopping"></i>
                 </span>
                 <span class="wishlist-icon" onclick="toggleWishlist(this, 'Harvest Moon Set', 2190)">
@@ -108,7 +108,7 @@
         <!-- Product 3 -->
         <div class="product-card">
             <div class="product-img">
-                <span class="cart-icon" onclick="addToCart('Golden Hour Sunflowers', 600)">
+                <span class="cart-icon" onclick="addToCart('Golden Hour Sunflowers', 600, '{% static "app1/images/Sage Meadow Romper.jpg" %}')">
                     <i class="fa-solid fa-cart-shopping"></i>
                 </span>
                 <span class="wishlist-icon" onclick="toggleWishlist(this, 'Golden Hour Sunflowers', 600)">
@@ -126,7 +126,7 @@
         <!-- Product 4 -->
         <div class="product-card">
             <div class="product-img">
-                <span class="cart-icon" onclick="addToCart('Bunny Keychain', 399)">
+                <span class="cart-icon" onclick="addToCart('Bunny Keychain', 399, '{% static "app1/images/Sage Meadow Romper.jpg" %}')">
                     <i class="fa-solid fa-cart-shopping"></i>
                 </span>
                 <span class="wishlist-icon" onclick="toggleWishlist(this, 'Bunny Keychain', 399)">
@@ -144,7 +144,7 @@
         <!-- Product 5 -->
         <div class="product-card">
             <div class="product-img">
-                <span class="cart-icon" onclick="addToCart('Customized Flower Bouquet', 800)">
+                <span class="cart-icon" onclick="addToCart('Customized Flower Bouquet', 800,'{% static "app1/images/Sage Meadow Romper.jpg" %}')">
                     <i class="fa-solid fa-cart-shopping"></i>
                 </span>
                 <span class="wishlist-icon" onclick="toggleWishlist(this, 'Customized Flower Bouquet', 800)">
@@ -162,7 +162,7 @@
         <!-- Product 6 -->
         <div class="product-card">
             <div class="product-img">
-                <span class="cart-icon" onclick="addToCart('Lilly', 300)">
+                <span class="cart-icon" onclick="addToCart('Lilly', 300,'{% static "app1/images/Sage Meadow Romper.jpg" %}')">
                     <i class="fa-solid fa-cart-shopping"></i>
                 </span>
                 <span class="wishlist-icon" onclick="toggleWishlist(this, 'Lilly', 300)">
@@ -180,7 +180,7 @@
         <!-- Product 7 -->
         <div class="product-card">
             <div class="product-img">
-                <span class="cart-icon" onclick="addToCart('Cute Bow', 200)">
+                <span class="cart-icon" onclick="addToCart('Cute Bow', 200,'{% static "app1/images/Sage Meadow Romper.jpg" %}')">
                     <i class="fa-solid fa-cart-shopping"></i>
                 </span>
                 <span class="wishlist-icon" onclick="toggleWishlist(this, 'Cute Bow', 200)">
@@ -198,7 +198,7 @@
         <!-- Product 8 -->
         <div class="product-card">
             <div class="product-img">
-                <span class="cart-icon" onclick="addToCart('Blossom Baby Frock', 2000)">
+                <span class="cart-icon" onclick="addToCart('Blossom Baby Frock', 2000, '{% static "app1/images/Sage Meadow Romper.jpg" %}')">
                     <i class="fa-solid fa-cart-shopping"></i>
                 </span>
                 <span class="wishlist-icon" onclick="toggleWishlist(this, 'Blossom Baby Frock Set', 2000)">
@@ -338,14 +338,16 @@ function saveCart() {
     updateCartUI();
 }
 
-function addToCart(name, price) {
+function addToCart(name, price, image) {
 
     if (!isAuthenticated) {
         window.location.href = "{% url 'login' %}";
         return;
     }
 
-    cart.push({ name, price });
+    cart.push({ name,
+        price,
+        image });
     saveCart();
     showNotification(`${name} added to cart!`);
 }
@@ -402,16 +404,29 @@ function updateCartUI() {
     let total = 0;
     
     cart.forEach((item, index) => {
-        total += item.price;
-        cartItems.innerHTML += `
-            <div class="cart-item">
-                <span>${item.name} - ₹${item.price}</span>
-                <span class="remove-btn" onclick="removeFromCart(${index})">
-                    <i class="fa-solid fa-xmark"></i>
-                </span>
+
+    total += item.price;
+
+    cartItems.innerHTML += `
+        <div class="cart-item">
+
+            <img src="${item.image}"
+                 alt="${item.name}"
+                 class="cart-product-image">
+
+            <div class="cart-info">
+                <h4>${item.name}</h4>
+                <p>₹${item.price}</p>
             </div>
-        `;
-    });
+
+            <span class="remove-btn"
+                  onclick="removeFromCart(${index})">
+                <i class="fa-solid fa-xmark"></i>
+            </span>
+
+        </div>
+    `;
+});
     
     if (cartTotal) cartTotal.innerText = "Total: ₹" + total;
     if (cartCount) cartCount.innerText = cart.length;
